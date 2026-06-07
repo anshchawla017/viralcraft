@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ViralCraft — AI Content Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated background grid -->
+  <div class="bg-grid"></div>
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-orb orb3"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="logo">Viral<span>Craft</span></div>
+      <div class="nav-links">
+        <a href="#generator">Generate</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <button class="nav-cta" onclick="scrollToGen()">Try for free →</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">✦ AI-powered content engine</div>
+    <h1 class="hero-title">Turn any idea into<br /><span class="gradient-text">viral content.</span></h1>
+    <p class="hero-sub">Generate scroll-stopping hooks, captions, hashtags & scripts for Instagram, YouTube Shorts and Twitter — in seconds.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="scrollToGen()">Start generating free →</button>
+      <button class="btn-ghost">See examples ↓</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><span>10x</span>faster content</div>
+      <div class="hstat-div"></div>
+      <div class="hstat"><span>3</span>platforms</div>
+      <div class="hstat-div"></div>
+      <div class="hstat"><span>100%</span>AI-powered</div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section" id="how">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Three steps to viral</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Drop your idea</h3>
+        <p>Type what your content is about — any topic, any niche, any language.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Pick your platform</h3>
+        <p>Instagram Reels, YouTube Shorts, or Twitter/X — each gets a custom strategy.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Copy & post</h3>
+        <p>Get hooks, captions, hashtags and a script outline — ready to use instantly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GENERATOR -->
+  <section class="generator-section" id="generator">
+    <div class="gen-container">
+
+      <!-- LEFT: INPUT PANEL -->
+      <div class="input-panel">
+        <div class="panel-header">
+          <div class="panel-dot red"></div>
+          <div class="panel-dot yellow"></div>
+          <div class="panel-dot green"></div>
+          <span class="panel-title">content_generator.ai</span>
+        </div>
+
+        <div class="input-body">
+          <div class="field-group">
+            <label>Platform</label>
+            <div class="platform-row" id="platformRow">
+              <button class="plat-btn active" data-plat="Instagram Reels">
+                <span class="plat-icon">📸</span> Instagram
+              </button>
+              <button class="plat-btn" data-plat="YouTube Shorts">
+                <span class="plat-icon">▶️</span> YouTube
+              </button>
+              <button class="plat-btn" data-plat="Twitter/X">
+                <span class="plat-icon">𝕏</span> Twitter/X
+              </button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>What's your content about? <span class="required">*</span></label>
+            <textarea id="topic" rows="4" placeholder="e.g. I tried waking up at 5am for 30 days, here's what happened to my productivity and mental health..."></textarea>
+            <div class="char-count" id="charCount">0 / 300</div>
+          </div>
+
+          <div class="two-col">
+            <div class="field-group">
+              <label>Your niche</label>
+              <input type="text" id="niche" placeholder="students, fitness, tech..." />
+            </div>
+            <div class="field-group">
+              <label>Tone</label>
+              <select id="tone">
+                <option value="Relatable & casual">Relatable & casual</option>
+                <option value="Motivational">Motivational</option>
+                <option value="Informative">Informative</option>
+                <option value="Funny & witty">Funny & witty</option>
+                <option value="Controversial">Controversial</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Target audience</label>
+            <div class="audience-pills" id="audiencePills">
+              <span class="pill" data-val="Gen Z (18-24)">Gen Z</span>
+              <span class="pill" data-val="Millennials (25-35)">Millennials</span>
+              <span class="pill" data-val="Students">Students</span>
+              <span class="pill" data-val="Entrepreneurs">Entrepreneurs</span>
+              <span class="pill" data-val="General audience">General</span>
+            </div>
+          </div>
+
+          <button class="generate-btn" id="generateBtn" onclick="generate()">
+            <span class="btn-text">✦ Generate viral content</span>
+            <span class="btn-loader" style="display:none">
+              <span class="dot-anim"></span> Generating...
+            </span>
+          </button>
+
+          <div class="error-box" id="errorBox" style="display:none"></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: OUTPUT PANEL -->
+      <div class="output-panel" id="outputPanel">
+
+        <!-- EMPTY STATE -->
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">✦</div>
+          <p>Your viral content will appear here</p>
+          <span>Fill in the form and hit generate</span>
+        </div>
+
+        <!-- LOADING STATE -->
+        <div class="loading-state" id="loadingState" style="display:none">
+          <div class="loading-bars">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+          <p>Crafting your viral strategy...</p>
+          <span id="loadingTip"></span>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="results-state" id="resultsState" style="display:none">
+
+          <!-- Viral score banner -->
+          <div class="score-banner" id="scoreBanner">
+            <div class="score-main">
+              <div class="score-circle" id="scoreCircle">
+                <span id="scoreNum">0</span>
+              </div>
+              <div class="score-info">
+                <div class="score-label">Viral score</div>
+                <div class="score-sublabel" id="scoreLabel">—</div>
+              </div>
+            </div>
+            <div class="score-stats">
+              <div class="ssstat">
+                <span class="ssval" id="statTime">—</span>
+                <span class="sskey">Best time</span>
+              </div>
+              <div class="ssstat">
+                <span class="ssval" id="statReach">—</span>
+                <span class="sskey">Est. reach</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="result-tabs">
+            <button class="rtab active" data-tab="hooks">Hooks</button>
+            <button class="rtab" data-tab="caption">Caption</button>
+            <button class="rtab" data-tab="hashtags">Hashtags</button>
+            <button class="rtab" data-tab="script">Script</button>
+          </div>
+
+          <div class="result-body">
+            <div class="rtab-content active" id="tab-hooks"></div>
+            <div class="rtab-content" id="tab-caption"></div>
+            <div class="rtab-content" id="tab-hashtags"></div>
+            <div class="rtab-content" id="tab-script"></div>
+          </div>
+
+          <button class="regenerate-btn" onclick="generate()">↺ Regenerate</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing-section" id="pricing">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Simple, honest pricing</h2>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-name">Free</div>
+        <div class="price-amount">₹0<span>/mo</span></div>
+        <ul class="price-features">
+          <li>✓ 5 generations/day</li>
+          <li>✓ All 3 platforms</li>
+          <li>✓ Hooks + captions</li>
+          <li class="dim">✗ Script outline</li>
+          <li class="dim">✗ Analytics tips</li>
+        </ul>
+        <button class="price-btn" onclick="scrollToGen()">Get started free</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">Most popular</div>
+        <div class="price-name">Pro</div>
+        <div class="price-amount">₹149<span>/mo</span></div>
+        <ul class="price-features">
+          <li>✓ Unlimited generations</li>
+          <li>✓ All 3 platforms</li>
+          <li>✓ Hooks + captions</li>
+          <li>✓ Full script outlines</li>
+          <li>✓ Analytics tips</li>
+        </ul>
+        <button class="price-btn primary">Start Pro →</button>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Agency</div>
+        <div class="price-amount">₹499<span>/mo</span></div>
+        <ul class="price-features">
+          <li>✓ Everything in Pro</li>
+          <li>✓ 10 team seats</li>
+          <li>✓ Brand voice training</li>
+          <li>✓ Bulk generation</li>
+          <li>✓ Priority support</li>
+        </ul>
+        <button class="price-btn">Contact us</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="logo">Viral<span>Craft</span></div>
+      <p>Built for creators who want results.</p>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
