@@ -80,7 +80,8 @@ Generate a complete viral content strategy. Respond ONLY with valid JSON, no mar
         model: 'openai/gpt-oss-20b',
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.9,
-        max_tokens: 1500,
+        max_tokens: 2000,
+        reasoning_effort: 'low',
       }),
     });
   } catch (networkErr) {
